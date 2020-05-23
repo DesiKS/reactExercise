@@ -57,3 +57,10 @@
   color: black;
   text-align: center;
 }
+
+.HorizontalLine {
+  margin: 8px;
+  height: 2px;
+  width: 100%;
+  background-color: lightgray;
+}

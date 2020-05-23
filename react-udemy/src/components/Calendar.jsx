@@ -40,15 +40,19 @@ class Calendar extends Component {
     return (
       <div className="Calendar">
         <WeekDays />
+        <div className="HorizontalLine" />
         {weeksArray.map((week, idx) => {
           return (
-            <Week
-              key={idx}
-              week={week}
-              handleClick={this.handleClick}
-              currentDayOfMonth={currentDayOfMonth}
-              activeDay={this.state.activeDay}
-            />
+            <div>
+              <Week
+                key={idx}
+                week={week}
+                handleClick={this.handleClick}
+                currentDayOfMonth={currentDayOfMonth}
+                activeDay={this.state.activeDay}
+              />
+              <div className="HorizontalLine" />
+            </div>
           );
         })}
       </div>
