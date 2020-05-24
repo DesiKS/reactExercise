@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './Calendar.css';
 import WeekDays from './WeekDays';
 import Week from './Week';
@@ -6,7 +6,7 @@ import {
   createCalendarDaysArr,
   updatedCalendarDaysArray,
   createWeeksArray
-} from './utilityFunctions';
+} from '../utilityFunctions';
 
 //Inputs:
 const daysInMonth = 31;
@@ -20,44 +20,34 @@ const updatedDaysArray = updatedCalendarDaysArray(
 );
 const weeksArray = createWeeksArray(updatedDaysArray);
 
-class Calendar extends Component {
-  constructor() {
-    super();
-    this.state = {
-      activeDay: currentDayOfMonth
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+const Calendar = () => {
+  const [activeDay, setActiveDay] = useState(currentDayOfMonth);
 
-  handleClick(event) {
+  const handleClick = (event) => {
     event.preventDefault();
     if (event.target.innerText >= currentDayOfMonth) {
-      this.setState({ activeDay: event.target.innerText });
+      setActiveDay(event.target.innerText);
     }
-  }
-
-  render() {
-    return (
-      <div className="Calendar">
-        <WeekDays />
-        <div className="HorizontalLine" />
-        {weeksArray.map((week, idx) => {
-          return (
-            <div>
-              <Week
-                key={idx}
-                week={week}
-                handleClick={this.handleClick}
-                currentDayOfMonth={currentDayOfMonth}
-                activeDay={this.state.activeDay}
-              />
-              <div className="HorizontalLine" />
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-}
+  };
+  return (
+    <div className="Calendar">
+      <WeekDays />
+      <div className="HorizontalLine" />
+      {weeksArray.map((week, idx) => {
+        return (
+          <div key={idx}>
+            <Week
+              week={week}
+              handleClick={handleClick}
+              currentDayOfMonth={currentDayOfMonth}
+              activeDay={activeDay}
+            />
+            <div className="HorizontalLine" />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default Calendar;

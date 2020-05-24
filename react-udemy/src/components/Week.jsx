@@ -2,9 +2,7 @@ import React from 'react';
 import Day from './Day';
 import './Calendar.css';
 
-const Week = (props) => {
-  const { week, handleClick, currentDayOfMonth, activeDay } = props;
-
+const Week = ({ week, handleClick, currentDayOfMonth, activeDay }) => {
   return (
     <div className="Week">
       {week.map((day, idx) => (
